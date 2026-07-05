@@ -1,0 +1,12 @@
+R_DEF: Internal format may change without notice
+local
+id bsInput
+id convertButton
+id lastUpdatedTextView
+id rateTextView
+id refreshButton
+id usdInput
+layout activity_main
+mipmap ic_launcher
+string app_name
+style Theme.BCVRate

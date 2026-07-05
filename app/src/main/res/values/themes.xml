@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.BCVRate" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#FFA726</item>
+        <item name="colorPrimaryVariant">#FB8C00</item>
+        <item name="colorOnPrimary">#121212</item>
+        <item name="colorSecondary">#FFA726</item>
+        <item name="colorSecondaryVariant">#FB8C00</item>
+        <item name="colorOnSecondary">#121212</item>
+        <item name="android:statusBarColor">#121212</item>
+    </style>
+</resources>
