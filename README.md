@@ -30,7 +30,7 @@ Asumo yo que si llegaste al punto de encontrar este repositorio de Github ya deb
 Valiste vergatario. Y todo es culpa de Google https://keepandroidopen.org/
 
 ## Si estás leyendo esto antes de Septiembre de 2026
-- Ve a Releases a descargar el .apk
+- Ve a Releases a descargar el .apk https://github.com/Cottongras5/melondollar/releases
 - Si te dice que _"permitir de orígenes desconocidos"_ dile que si y evítate las pantallas de miedo que te ponen. O sea, qué derecho tienen a decir si un software de un repo random es apto o no? **es la misma empresa que quiere que no tengas nada y seas feliz con ello**.
 - Si te saltaste todas las pantallas de miedo exitosamente, ya lo deberías tener
 
