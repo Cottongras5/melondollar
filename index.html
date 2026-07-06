@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Melon Dollar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #1e4346;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .rate-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .rate-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ff9900;
+            letter-spacing: -1px;
+        }
+        .rate-number .currency {
+            font-size: 28px;
+            font-weight: 400;
+            margin-left: 4px;
+        }
+        .last-updated {
+            font-size: 14px;
+            color: #8ba3a7;
+            margin-bottom: 25px;
+        }
+        .btn-primary {
+            background: #ff9900;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 0;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            max-width: 260px;
+            text-transform: uppercase;
+            transition: opacity 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-primary:active {
+            transform: scale(0.96);
+        }
+        .btn-primary:disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .error-msg {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: none;
+            background: rgba(255, 0, 0, 0.1);
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+        .error-msg.show { display: block; }
+        .converter-title {
+            font-size: 20px;
+            font-weight: 400;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .converter-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .converter-row label {
+            font-size: 18px;
+            color: #ffffff;
+            padding-bottom: 5px;
+        }
+        .converter-row input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #ff9900;
+            color: #ffffff;
+            font-size: 20px;
+            text-align: center;
+            width: 70px;
+            padding: 5px 0;
+            outline: none;
+            border-radius: 0;
+        }
+        .converter-row input:focus {
+            border-bottom-color: #ffcc66;
+        }
+        .converter-row .eq {
+            font-size: 20px;
+            color: #ffffff;
+            padding-bottom: 5px;
+        }
+        .btn-convert {
+            background: #ff9900;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 0;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            max-width: 260px;
+            text-transform: uppercase;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        .btn-convert:active {
+            transform: scale(0.96);
+        }
+        .btn-android {
+            background: transparent;
+            border: 2px solid #ff9900;
+            color: #ff9900;
+            border-radius: 6px;
+            padding: 12px 0;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            max-width: 260px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s, color 0.2s;
+            margin-top: 20px;
+        }
+        .btn-android:hover,
+        .btn-android:active {
+            background: #ff9900;
+            color: #ffffff;
+            transform: scale(0.98);
+        }
+        .pulse {
+            animation: pulse 1s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        @media (max-width: 400px) {
+            .converter-row input { width: 60px; }
+            .rate-number { font-size: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">🍈 Melon Dollar</div>
+
+        <div id="errorMsg" class="error-msg"></div>
+
+        <div class="rate-display">
+            <div class="rate-number" id="rateNumber">
+                <span id="rateValue">--</span>
+                <span class="currency">Bs</span>
+            </div>
+            <div class="last-updated" id="lastUpdate">Última actualización: --</div>
+        </div>
+
+        <button class="btn-primary" id="refreshBtn">⟳ Actualizar</button>
+
+        <div class="converter-title">Conversor</div>
+
+        <div class="converter-row">
+            <label for="bsInput">Bs</label>
+            <input type="number" id="bsInput" placeholder="0" step="0.01" />
+            <span class="eq">=</span>
+            <input type="number" id="usdInput" placeholder="0" step="0.01" />
+            <label for="usdInput">USD</label>
+        </div>
+
+        <button class="btn-convert" id="convertBtn">CONVERTIR</button>
+
+        <a href="https://github.com/Cottongras5/melondollar/releases/" target="_blank" class="btn-android">Descargar para Android</a>
+    </div>
+
+    <script>
+        (function() {
+            const rateValue = document.getElementById('rateValue');
+            const lastUpdate = document.getElementById('lastUpdate');
+            const refreshBtn = document.getElementById('refreshBtn');
+            const convertBtn = document.getElementById('convertBtn');
+            const errorMsg = document.getElementById('errorMsg');
+            const bsInput = document.getElementById('bsInput');
+            const usdInput = document.getElementById('usdInput');
+            
+            let currentRate = null;
+
+            const API_URL = 'https://ve.dolarapi.com/v1/dolares/oficial';
+
+            function showError(msg) {
+                errorMsg.textContent = msg;
+                errorMsg.classList.add('show');
+            }
+            function hideError() {
+                errorMsg.classList.remove('show');
+            }
+            function formatDate(dateStr) {
+                if (!dateStr) return '--';
+                try {
+                    const d = new Date(dateStr);
+                    if (isNaN(d.getTime())) return dateStr;
+                    return d.toLocaleString('es-VE', {
+                        day: '2-digit', month: '2-digit', year: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    });
+                } catch (_) { return dateStr; }
+            }
+
+            async function fetchRate() {
+                hideError();
+                refreshBtn.disabled = true;
+                refreshBtn.textContent = '⟳ CARGANDO';
+                refreshBtn.classList.add('pulse');
+
+                try {
+                    const resp = await fetch(API_URL);
+                    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                    const data = await resp.json();
+                    let rate = data;
+                    if (Array.isArray(data) && data.length > 0) rate = data[0];
+
+                    const promedio = rate.promedio;
+                    const fecha = rate.fechaActualizacion;
+
+                    if (promedio == null) throw new Error('Sin datos de tasa');
+
+                    currentRate = Number(promedio);
+                    rateValue.textContent = currentRate.toFixed(2);
+                    lastUpdate.textContent = `Última actualización: ${formatDate(fecha)}`;
+                    hideError();
+
+                } catch (err) {
+                    console.error(err);
+                    showError(`⚠️ Error: ${err.message || 'No se pudo obtener la tasa'}`);
+                    rateValue.textContent = '--';
+                    lastUpdate.textContent = 'Última actualización: --';
+                    currentRate = null;
+                } finally {
+                    refreshBtn.disabled = false;
+                    refreshBtn.textContent = '⟳ ACTUALIZAR';
+                    refreshBtn.classList.remove('pulse');
+                }
+            }
+
+            function convertCurrency() {
+                if (currentRate === null) {
+                    showError('⚠️ Primero actualiza la tasa de cambio.');
+                    return;
+                }
+
+                const bsVal = parseFloat(bsInput.value);
+                const usdVal = parseFloat(usdInput.value);
+
+                if (!isNaN(bsVal) && bsVal >= 0) {
+                    usdInput.value = (bsVal / currentRate).toFixed(2);
+                } else if (!isNaN(usdVal) && usdVal >= 0) {
+                    bsInput.value = (usdVal * currentRate).toFixed(2);
+                } else {
+                    showError('Ingresa un monto válido en Bs o USD.');
+                }
+            }
+
+            refreshBtn.addEventListener('click', fetchRate);
+            convertBtn.addEventListener('click', convertCurrency);
+            
+            // Initial load
+            fetchRate();
+            
+            // Auto-refresh every 5 minutes
+            setInterval(fetchRate, 5 * 60 * 1000);
+        })();
+    </script>
+</body>
+</html>
