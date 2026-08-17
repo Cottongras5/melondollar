@@ -14,7 +14,7 @@ Ver el precio del dólar es una necesidad básica del venezolano, y para eso exi
 ### Y ese alguien soy yo.
 
 
-Melon Dollar es una aplicación ligera y minimalista para Android que va directo al grano, te muestra  cuánto está el dólar, y también te permite calcular de bolívares a dólares y viceversa. No hace nada que no haya prometido en este texto.
+Melon Dollar es una aplicación ligera y minimalista para Android que va directo al grano, te muestra  cuánto está el dólar, y también te permite calcular de bolívares a dólares y viceversa. No hace nada que no haya prometido en este texto. Quizá no sea la más original, pero a diferencia de los millones clones de Al Cambio que hay regados por internet:
 
 - 📻 **No tiene anuncios ni compras en la aplicación:** La mejor parte sin duda, dile adiós a interrupciones molestas que nunca pediste en tu vida, dile adiós a perderte de todo por no vender tu alma, dile adiós a las empresas que se aprovechan de tu tiempo, y de tu billetera...
 - ☀️ **Es 100% Gratis, lo quieras o no:** Así mismo como lo lees, nadie debería quitarte una necesidad de las manos y cobrarte por ello. Tu teléfono, tus reglas. Melon Dollar lo respeta.
@@ -26,8 +26,8 @@ Melon Dollar es una aplicación ligera y minimalista para Android que va directo
 
 Asumo yo que si llegaste al punto de encontrar este repositorio de Github ya deberías saber cómo instalar un .apk, pero en caso de que no sea así, acá hay un pequeño resumen que lo explica:
 
-## Si estás leyendo esto después de Septiembre de 2026
-Valiste vergatario. Y todo es culpa de Google https://keepandroidopen.org/
+## Si estás leyendo esto después de 2027
+Valiste verga https://keepandroidopen.org/
 
 ## Si estás leyendo esto antes de Septiembre de 2026
 - Ve a Releases a descargar el .apk https://github.com/Cottongras5/melondollar/releases
